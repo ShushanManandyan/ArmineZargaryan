@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Արմինե Զարգարյան — Յոգայի հրահանգիչ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Armenian:wght@300;400;600;800;900&family=Noto+Serif+Armenian:wght@300&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#221728;      /* մուգ սալորագույն */
+    --deep:#2E1F35;
+    --card:#3A2A42;
+    --cream:#F5EFE8;
+    --gold:#D9A441;       /* ոսկեգույն */
+    --plum:#B489B0;       /* բաց սալոր */
+    --line:rgba(245,239,232,.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Noto Sans Armenian',sans-serif;
+    background:var(--night);
+    color:var(--cream);
+    line-height:1.7;
+    font-size:16.5px;
+    font-weight:300;
+  }
+  img{max-width:100%;display:block}
+
+  /* ── Վերնագիծ ── */
+  .topbar{
+    position:fixed;top:0;left:0;right:0;z-index:30;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:1.1rem 2rem;
+    background:linear-gradient(to bottom,rgba(34,23,40,.85),transparent);
+    font-size:.85rem;letter-spacing:.1em;
+  }
+  .topbar .mark{font-weight:800;letter-spacing:.05em}
+  .topbar .mark em{color:var(--gold);font-style:normal}
+  .topbar nav{display:flex;gap:1.6rem}
+  .topbar a{color:var(--cream);text-decoration:none;opacity:.8}
+  .topbar a:hover,.topbar a:focus-visible{opacity:1;color:var(--gold)}
+
+  /* ── Հերոս (վիդեո) ── */
+  .hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden}
+  .hero video,.hero .fallback{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  }
+  .hero::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(100deg,rgba(34,23,40,.92) 25%,rgba(34,23,40,.45) 65%,rgba(34,23,40,.25));
+  }
+  .hero-inner{
+    position:relative;z-index:2;
+    max-width:1150px;margin:0 auto;width:100%;
+    padding:6rem 2rem 3rem;
+  }
+  .hero .eyebrow{
+    display:inline-block;
+    font-size:.78rem;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--gold);border:1px solid rgba(217,164,65,.4);
+    padding:.4rem 1rem;border-radius:99px;margin-bottom:1.6rem;
+  }
+  .hero h1{
+    font-size:clamp(2rem,8.5vw,6.4rem);
+    font-weight:900;line-height:1.02;
+    text-transform:uppercase;letter-spacing:.01em;
+    margin-bottom:1.4rem;
+  }
+  .hero h1 span{color:var(--gold)}
+  .hero p{max-width:38ch;color:#DCD3C9;font-size:1.05rem;margin-bottom:2.4rem}
+  .btn{
+    display:inline-block;padding:1rem 2.8rem;
+    background:var(--gold);color:#221728;text-decoration:none;
+    font-weight:600;letter-spacing:.08em;font-size:.95rem;
+    border-radius:4px;transition:transform .15s ease,background .2s;
+  }
+  .btn:hover,.btn:focus-visible{background:#E8B95C;transform:translateY(-2px)}
+  .btn.ghost{background:transparent;color:var(--cream);border:1px solid var(--line);margin-left:.8rem}
+  .btn.ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+  /* ── Թվերի գոտի ── */
+  .statband{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    background:var(--deep);
+  }
+  .statband .s{
+    text-align:center;padding:2.2rem 1rem;
+    border-right:1px solid var(--line);
+  }
+  .statband .s:last-child{border-right:none}
+  .statband .n{
+    font-size:2.6rem;font-weight:900;color:var(--gold);line-height:1.1;
+  }
+  .statband .t{font-size:.82rem;letter-spacing:.12em;color:#B9AEBE;text-transform:uppercase}
+
+  section{padding:5.5rem 0}
+  .wrap{max-width:1150px;margin:0 auto;padding:0 2rem}
+  .eyebrow{
+    font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:1rem;font-weight:600;
+  }
+  h2{font-size:clamp(1.9rem,4.5vw,3rem);font-weight:800;line-height:1.15;margin-bottom:2rem;text-transform:uppercase}
+
+  /* ── Մասին ── */
+  .about{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+  .about .photo{border-radius:8px;overflow:hidden;position:relative}
+  .about .photo::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(to top,rgba(34,23,40,.35),transparent 50%);
+  }
+  .about p{color:#DCD3C9;margin-bottom:1rem}
+  .about p strong{color:var(--cream);font-weight:600}
+
+  /* ── Դասեր ── */
+  .classes{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+  .cls{
+    background:var(--card);border:1px solid var(--line);border-radius:8px;
+    padding:2rem 1.7rem;position:relative;overflow:hidden;
+    transition:transform .2s ease,border-color .2s;
+  }
+  .cls:hover{transform:translateY(-4px);border-color:rgba(217,164,65,.5)}
+  .cls h3{font-size:1.12rem;font-weight:600;margin-bottom:.6rem}
+  .cls p{font-size:.92rem;color:#C9BFC6}
+  .cls .tagline{
+    display:inline-block;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:1rem;
+  }
+
+  /* ── Փորձ ── */
+  .xp-row{
+    display:grid;grid-template-columns:170px 1fr;gap:2rem;
+    padding:1.8rem 0;border-bottom:1px solid var(--line);
+  }
+  .xp-row:first-of-type{border-top:1px solid var(--line)}
+  .xp-row .yr{font-weight:800;color:var(--gold);font-size:1.05rem}
+  .xp-row h3{font-size:1.1rem;font-weight:600;margin-bottom:.25rem}
+  .xp-row p{color:#C9BFC6;font-size:.93rem}
+
+  /* ── Պատկերասրահ ── */
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+  .gallery figure{
+    border-radius:8px;overflow:hidden;aspect-ratio:3/4;position:relative;
+  }
+  .gallery img{
+    width:100%;height:100%;object-fit:cover;
+    filter:saturate(.85) contrast(1.05);
+    transition:transform .5s ease,filter .3s;
+  }
+  .gallery figure::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(to top,rgba(46,31,53,.5),transparent 45%);
+    pointer-events:none;
+  }
+  .gallery figure:hover img{transform:scale(1.05);filter:saturate(1) contrast(1.05)}
+  .gallery figure.wide{grid-column:span 2;aspect-ratio:auto}
+
+  /* ── Կապ ── */
+  .contact{
+    background:var(--deep);border-top:1px solid var(--line);
+    text-align:center;padding:6rem 0;
+  }
+  .contact h2{margin-bottom:.6rem}
+  .contact p{color:#C9BFC6;margin-bottom:2.4rem}
+  .contact .links{margin-top:2.4rem;display:flex;gap:2.4rem;justify-content:center;flex-wrap:wrap;font-size:.95rem}
+  .contact .links a{color:var(--plum);text-decoration:none;border-bottom:1px dotted rgba(180,137,176,.5)}
+  .contact .links a:hover{color:var(--gold)}
+
+  footer{padding:1.8rem;text-align:center;font-size:.78rem;color:#8A7E90;letter-spacing:.08em}
+
+  @media(max-width:860px){
+    .topbar nav{display:none}
+    .statband{grid-template-columns:repeat(2,1fr)}
+    .statband .s:nth-child(2){border-right:none}
+    .statband .s:nth-child(-n+2){border-bottom:1px solid var(--line)}
+    .about{grid-template-columns:1fr;gap:2.5rem}
+    .classes{grid-template-columns:1fr}
+    .gallery{grid-template-columns:repeat(2,1fr)}
+    .gallery figure.wide{grid-column:span 2}
+    .btn.ghost{margin-left:0;margin-top:.8rem}
+    section{padding:3.5rem 0}
+  }
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .cls,.btn,.gallery img{transition:none}
+    .hero video{display:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <span class="mark">ԱՐՄԻՆԵ <em>ԶԱՐԳԱՐՅԱՆ</em></span>
+  <nav>
+    <a href="#about">Իմ մասին</a>
+    <a href="#classes">Դասեր</a>
+    <a href="#xp">Փորձ</a>
+    <a href="#contact">Կապ</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <video autoplay muted loop playsinline poster="photos/beach-headstand.jpg">
+    <source src="photos/video-2.mp4" type="video/mp4">
+  </video>
+  <img class="fallback" src="photos/beach-headstand.jpg" alt="" style="z-index:-1">
+  <div class="hero-inner">
+    <span class="eyebrow">Յոգայի հրահանգիչ</span>
+    <h1>Ուժ և<br>ներքին <span>խաղաղություն</span></h1>
+    <p>Արմինե Զարգարյան · Յոգա բոլոր տարիքի կանանց համար — սկսնակից մինչև առաջադեմ մակարդակ</p>
+    <div>
+      <a class="btn" href="#contact">Կապվել ինձ հետ</a>
+      <a class="btn ghost" href="#classes">Դասերի մասին</a>
+    </div>
+  </div>
+</div>
+
+<div class="statband">
+  <div class="s"><div class="n">8+</div><div class="t">տարվա փորձ</div></div>
+  <div class="s"><div class="n">500+</div><div class="t">ուսանողուհի</div></div>
+  <div class="s"><div class="n">3</div><div class="t">հավաստագիր</div></div>
+  <div class="s"><div class="n">4</div><div class="t">ուղղություն</div></div>
+</div>
+
+<section id="about">
+  <div class="wrap">
+    <div class="about">
+      <div>
+        <p class="eyebrow">Իմ մասին</p>
+        <h2>Յոգան փոխում է ամեն ինչ</h2>
+        <p>Ես յոգայի հրահանգիչ եմ և աշխատում եմ <strong>բոլոր տարիքի կանանց</strong> հետ։ Իմ մոտեցումը համատեղում է ֆիզիկական ուժի զարգացումը շնչառական պրակտիկաների և գիտակցված շարժման հետ։</p>
+        <p>Յուրաքանչյուր դաս կառուցում եմ այնպես, որ և՛ սկսնակը, և՛ փորձառու ուսանողուհին ստանան իրենց ծանրաբեռնվածությունը՝ առանց վնասվածքների ռիսկի։ <em>(Տեքստը պայմանական է)</em></p>
+      </div>
+      <div class="photo"><img src="photos/studio-sidebend.jpg" alt="Արմինեն ստուդիայում կողային ձգում է կատարում"></div>
+    </div>
+  </div>
+</section>
+
+<section id="classes" style="padding-top:0">
+  <div class="wrap">
+    <p class="eyebrow">Դասեր</p>
+    <h2>Ինչ եմ առաջարկում</h2>
+    <div class="classes">
+      <div class="cls"><span class="tagline">Խումբ</span><h3>Խմբային դասեր</h3><p>Հաթհա յոգա և վինյասա՝ հարմարեցված խմբի մակարդակին։ Մինչև 15 մասնակից։</p></div>
+      <div class="cls"><span class="tagline">Անհատական</span><h3>Անհատական դասեր</h3><p>Ծրագիր՝ ըստ ձեր նպատակների. ճկունություն, մեջքի առողջություն, սթրես։</p></div>
+      <div class="cls"><span class="tagline">50+</span><h3>Յոգա տարեց կանանց</h3><p>Մեղմ ու անվտանգ պրակտիկա՝ շարժունության և հավասարակշռության համար։</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="xp" style="padding-top:0">
+  <div class="wrap">
+    <p class="eyebrow">Փորձ</p>
+    <h2>Փորձառություն</h2>
+    <div class="xp-row">
+      <div class="yr">2021 — այժմ</div>
+      <div><h3>Յոգայի հրահանգիչ · «Սպորտ ակումբի անվանում»</h3><p>Խմբային և անհատական դասեր կանանց համար։ (պայմանական)</p></div>
+    </div>
+    <div class="xp-row">
+      <div class="yr">2019 — 2021</div>
+      <div><h3>Յոգայի հրահանգիչ · «Ստուդիայի անվանում»</h3><p>Հաթհա յոգայի դասեր սկսնակների և միջին խմբերի համար։ (պայմանական)</p></div>
+    </div>
+    <div class="xp-row">
+      <div class="yr">2018</div>
+      <div><h3>Yoga Alliance RYT-200 հավաստագիր</h3><p>Հրահանգիչի որակավորման դասընթաց։ (պայմանական)</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" style="padding-top:0">
+  <div class="wrap">
+    <p class="eyebrow">Պատկերասրահ</p>
+    <h2>Իմ պրակտիկան</h2>
+    <div class="gallery">
+      <figure><img src="photos/studio-sideplank.jpg" alt="Կողային հենակետային դիրք"></figure>
+      <figure><img src="photos/beach-twist.jpg" alt="Նստած ոլորում ծովափին"></figure>
+      <figure><img src="photos/studio-sidelunge.jpg" alt="Կողային ցատկ ստուդիայում"></figure>
+      <figure class="wide"><img src="photos/beach-lunge.jpg" alt="Ցածր ցատկ ծովափի տախտակամածին" style="aspect-ratio:auto"></figure>
+      <figure><img src="photos/beach-meditation.jpg" alt="Մեդիտացիա մայրամուտին"></figure>
+    </div>
+  </div>
+</section>
+
+<div id="contact" class="contact">
+  <div class="wrap">
+    <p class="eyebrow">Կապ</p>
+    <h2>Աշխատենք միասին</h2>
+    <p>Պատրաստ եմ քննարկել համագործակցությունը ձեր ակումբի հետ</p>
+    <a class="btn" href="tel:+37400000000">Զանգահարել հիմա</a>
+    <div class="links">
+      <a href="tel:+37400000000">+374 00 00 00 00</a>
+      <a href="mailto:armine@example.com">armine@example.com</a>
+      <a href="https://instagram.com/">@armine.yoga</a>
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 Արմինե Զարգարյան · Յոգայի հրահանգիչ</footer>
+
+</body>
+</html>
